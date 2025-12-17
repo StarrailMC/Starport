@@ -1,4 +1,4 @@
-## Starport Alpha 0.1
+## Starport Alpha 0.3
 
 Starport is a WIP core plugin for the Starrail SMP Minecraft Server. This plugin is desgined for PaperMC 1.21.11
 
