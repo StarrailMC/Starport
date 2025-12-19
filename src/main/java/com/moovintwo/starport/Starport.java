@@ -13,14 +13,15 @@ public final class Starport extends JavaPlugin {
 
         getLogger().info("Starport Initialized");
 
-        Ranks.init();
+        rankManager = new RankManager(this);
+        rankManager.load();
 
 
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
         getServer().getPluginManager().registerEvents(new MessageListener(), this);
 
         this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
-            Commands commands = event.registrar();
+            Commands commands = event.register();
 
             commands.register(
                     CoreCMD.starport(),
@@ -31,6 +32,6 @@ public final class Starport extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        if (rankManager != null) rankManager.save();
     }
 }

@@ -17,10 +17,11 @@ public class MessageListener implements Listener {
     public void onPlayerMessage(AsyncChatEvent event) {
 
         event.renderer((player, playerName, message, viewer) -> {
-
-            Component rank = Ranks.getRank(player.getUniqueId().toString());
+            Component rank = Starport.rankManager.getRank(player.getUniqueId());
+            if (rank == null) rank = Component.empty();
 
             Component playerHead = MiniMessage.miniMessage().deserialize("<head:" + player.getName() + "> ");
+
             Component nameComp = Component.text(player.getName());
             Component separator = Component.text(" | ", NamedTextColor.GRAY);
 

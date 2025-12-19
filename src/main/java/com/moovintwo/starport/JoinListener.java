@@ -17,7 +17,8 @@ public class JoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
 
         Player player = event.getPlayer();
-        Component rank = Ranks.getRank(player.getUniqueId().toString());
+        Component rank = Starport.rankManager.getRank(player.getUniqueId());
+        if (rank == null) rank = Component.empty();
 
         Component playerHead = MiniMessage.miniMessage().deserialize("<head:" + event.getPlayer().getName() + "> ");
         Component playerName = Component.text(player.getName());

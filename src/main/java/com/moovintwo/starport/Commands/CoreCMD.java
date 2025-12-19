@@ -1,25 +1,62 @@
 package com.moovintwo.starport.Commands;
 
 import com.mojang.brigadier.Command;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
+import io.papermc.paper.command.brigadier.arguments.PlayerArgument;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.entity.Player;
 
+import com.moovintwo.starport.Rank;
+import com.moovintwo.starport.Starport;
+
+/**
+ * Core command registration for /starport
+ */
 public class CoreCMD {
-
 
     public static LiteralCommandNode<CommandSourceStack> starport() {
         return Commands.literal("starport")
+                // /starport version
                 .then(Commands.literal("version")
                         .executes(ctx -> {
-                            ctx.getSource().getSender().sendMessage(MiniMessage.miniMessage().deserialize("<bold><blue>Starport</blue></bold> <red>Alpha 0.1</red>" +
-                                    "<newline>Created by <head:Moovintwo:true> <hover:show_text:'I would link my Social Media,<newline>but I'm way too lazy'><gold>Moovintwo</gold>" +
-                                    "<newline><gray>---------------------</gray>" +
-                                    "<newline>This is the Core Plugin for Starrail SMP"));
+                            ctx.getSource().getSender().sendMessage(MiniMessage.miniMessage().deserialize(
+                                    "<bold><blue>Starport</blue></bold> <red>Alpha 0.1</red>" +
+                                            "<newline>Created by <head:Moovintwo:true> <hover:show_text:'I would link my Social Media,<newline>but I'm way too lazy'><gold>Moovintwo</gold>" +
+                                            "<newline><gray>---------------------</gray>" +
+                                            "<newline>This is the Core Plugin for Starrail SMP"));
                             return Command.SINGLE_SUCCESS;
                         }))
+                .then(Commands.literal("ranks")
+                        // /starport ranks info
+                        .then(Commands.literal("info")
+                                .executes(ctx -> {
+                                    ctx.getSource().getSender().sendMessage(MiniMessage.miniMessage().deserialize(
+                                            "<bold><blue>Starport Ranks</blue></bold>" +
+                                                    "<newline><gray>---------------------</gray>" +
+                                                    "<newline><gold>Owner</gold> - Full access to all server features and settings." +
+                                                    "<newline><gold>Co-Owner</gold> - Nearly full access, excluding ownership transfer." +
+                                                    "<newline><gold>Developer</gold> - Access to development tools and debugging." +
+                                                    "<newline><gold>Admin</gold> - Manage players and moderate the server." +
+                                                    "<newline><gold>Moderator</gold> - Assist in player management and enforce rules." +
+                                                    "<newline><gold>Member</gold> - Standard player with access to general features.")));
+                                    return Command.SINGLE_SUCCESS;
+                                }))
+                        // /starport ranks set <player> <rank>
+                        .then(Commands.literal("set")
+                                .then(Commands.argument("player", PlayerArgument.player())
+                                        .then(Commands.argument("rank", new RankArgument())
+                                                .executes(ctx -> {
+                                                    Player player = PlayerArgument.getPlayer(ctx, "player");
+                                                    Rank rank = ctx.getArgument("rank", Rank.class);
+
+                                                    Starport.rankManager.setRank(player.getUniqueId(), rank);
+
+                                                    ctx.getSource().getSender().sendMessage(MiniMessage.miniMessage().deserialize(
+                                                            "<green>Set " + player.getName() + "'s rank to " + rank.name() + "</green>"));
+                                                    return Command.SINGLE_SUCCESS;
+                                                })))))
                 .build();
     }
 
