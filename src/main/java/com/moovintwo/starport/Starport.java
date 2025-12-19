@@ -2,6 +2,8 @@ package com.moovintwo.starport;
 
 import com.moovintwo.starport.Commands.CoreCMD;
 import com.moovintwo.starport.Data.Ranks;
+import com.moovintwo.starport.Listeners.JoinListener;
+import com.moovintwo.starport.Listeners.MessageListener;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.plugin.java.JavaPlugin;

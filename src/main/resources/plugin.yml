@@ -1,5 +1,5 @@
 name: Starport
-version: '0.2-Alpha'
+version: '0.3-Alpha'
 main: com.moovintwo.starport.Starport
 api-version: '1.21'
 prefix: Starport

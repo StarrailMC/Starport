@@ -1,4 +1,4 @@
-package com.moovintwo.starport;
+package com.moovintwo.starport.Listeners;
 
 import com.moovintwo.starport.Data.Ranks;
 import net.kyori.adventure.text.Component;
