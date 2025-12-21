@@ -1,5 +1,6 @@
-package com.moovintwo.starport.Commands;
+package com.starrail.starport.Commands;
 
+import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.ArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -7,31 +8,35 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
-import io.papermc.paper.command.brigadier.CustomArgumentType;
+import com.starrail.starport.Data.Rank;
 import io.papermc.paper.command.brigadier.MessageComponentSerializer;
+import io.papermc.paper.command.brigadier.argument.CustomArgumentType;
 import net.kyori.adventure.text.Component;
-import org.checkerframework.checker.nullness.qual.NullMarked;
+import io.papermc.paper.command.brigadier.*;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
 
 @NullMarked
-public class RankArgument implements CustomArgumentType.Converted<Rank, String> {
+public class RankArgument implements CustomArgumentType<Rank, String> {
+
+    @Override
+    public Rank parse(StringReader reader) throws CommandSyntaxException {
+        String input = reader.readUnquotedString();
+
+        try {
+            return Rank.valueOf(input.toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException e) {
+            throw new com.mojang.brigadier.exceptions.SimpleCommandExceptionType(() -> "Invalid Rank" + input).create();
+        }
+    }
 
     private static final DynamicCommandExceptionType ERROR_INVALID_RANK = new DynamicCommandExceptionType(rank -> 
         MessageComponentSerializer.message().serialize(
             Component.text(rank + " is not a rank!")
         )
     );
-
-    @Override
-    public Rank convert(String nativeType) throws CommandSyntaxException {
-        try {
-            return Rank.valueOf(nativeType.toUpperCase(Locale.ROOT));
-        } catch (IllegalArgumentException ignored) {
-            throw ERROR_INVALID_RANK.create(nativeType);
-        }
-    }
 
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {

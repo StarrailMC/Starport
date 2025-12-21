@@ -1,7 +1,9 @@
-package com.moovintwo.starport.Data;
+package com.starrail.starport;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.starrail.starport.Data.Rank;
+import com.starrail.starport.Data.UUIDs;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -21,7 +23,7 @@ public class RankManager {
     private final JavaPlugin plugin;
     private final File file;
     private final Gson gson = new Gson();
-    private final Map<UUID, Rank> ranks = new ConcurrentHashMap<>();
+    private final Map<UUID, com.starrail.starport.Data.Rank> ranks = new ConcurrentHashMap<>();
 
     public RankManager(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -79,7 +81,7 @@ public class RankManager {
 
     public void setRank(UUID uuid, Rank rank) {
         ranks.put(uuid, rank == null ? Rank.MEMBER : rank);
-        save();
+        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, this::save);
     }
 
     public Map<UUID, Rank> getAll() {

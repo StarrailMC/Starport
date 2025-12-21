@@ -1,9 +1,9 @@
 name: Starport
 version: '0.3-Alpha'
-main: com.moovintwo.starport.Starport
+main: com.starrail.starport.Starport
 api-version: '1.21'
 prefix: Starport
 load: STARTUP
-authors: [Moovintwo]
+authors: [Moovintwo, Deplo902]
 description: The Core Plugin for the Starrail Server
 website: none

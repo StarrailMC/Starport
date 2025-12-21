@@ -1,6 +1,6 @@
-package com.moovintwo.starport.Listeners;
+package com.starrail.starport.Listeners;
 
-import com.moovintwo.starport.Data.Ranks;
+import com.starrail.starport.Starport;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
@@ -13,11 +13,17 @@ import java.util.Random;
 
 public class JoinListener implements Listener {
 
+    private final Starport plugin;
+
+    public JoinListener(Starport plugin) {
+        this.plugin = plugin;
+    }
+
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerJoin(PlayerJoinEvent event) {
 
         Player player = event.getPlayer();
-        Component rank = Starport.rankManager.getRank(player.getUniqueId());
+        Component rank = plugin.getRankManager().getRank(player.getUniqueId()).component();
         if (rank == null) rank = Component.empty();
 
         Component playerHead = MiniMessage.miniMessage().deserialize("<head:" + event.getPlayer().getName() + "> ");

@@ -1,22 +1,31 @@
-package com.moovintwo.starport.Commands;
+package com.starrail.starport.Commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.tree.LiteralCommandNode;
+import com.starrail.starport.Data.Rank;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
-import io.papermc.paper.command.brigadier.arguments.PlayerArgument;
+import io.papermc.paper.command.brigadier.argument.ArgumentTypes;
+import io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 
-import com.moovintwo.starport.Rank;
-import com.moovintwo.starport.Starport;
+import com.starrail.starport.Starport;
 
 /**
  * Core command registration for /starport
  */
 public class CoreCMD {
 
-    public static LiteralCommandNode<CommandSourceStack> starport() {
+    private final Starport plugin;
+
+    public CoreCMD(Starport plugin) {
+        this.plugin = plugin;
+    }
+
+
+
+    public LiteralCommandNode<CommandSourceStack> starport() {
         return Commands.literal("starport")
                 // /starport version
                 .then(Commands.literal("version")
@@ -32,26 +41,26 @@ public class CoreCMD {
                         // /starport ranks info
                         .then(Commands.literal("info")
                                 .executes(ctx -> {
-                                    ctx.getSource().getSender().sendMessage(MiniMessage.miniMessage().deserialize(
-                                            "<bold><blue>Starport Ranks</blue></bold>" +
-                                                    "<newline><gray>---------------------</gray>" +
-                                                    "<newline><gold>Owner</gold> - Full access to all server features and settings." +
-                                                    "<newline><gold>Co-Owner</gold> - Nearly full access, excluding ownership transfer." +
-                                                    "<newline><gold>Developer</gold> - Access to development tools and debugging." +
-                                                    "<newline><gold>Admin</gold> - Manage players and moderate the server." +
-                                                    "<newline><gold>Moderator</gold> - Assist in player management and enforce rules." +
-                                                    "<newline><gold>Member</gold> - Standard player with access to general features.")));
+                                    ctx.getSource().getSender().sendMessage(MiniMessage.miniMessage().deserialize("<bold><blue>Starport Ranks</blue></bold>" +
+                                            "<newline><gray>---------------------</gray>" +
+                                            "<newline><gold>Owner</gold> - Full access to all server features and settings." +
+                                            "<newline><gold>Co-Owner</gold> - Nearly full access, excluding ownership transfer." +
+                                            "<newline><gold>Developer</gold> - Access to development tools and debugging." +
+                                            "<newline><gold>Admin</gold> - Manage players and moderate the server." +
+                                            "<newline><gold>Moderator</gold> - Assist in player management and enforce rules." +
+                                            "<newline><gold>Member</gold> - Standard player with access to general features."));
                                     return Command.SINGLE_SUCCESS;
                                 }))
                         // /starport ranks set <player> <rank>
                         .then(Commands.literal("set")
-                                .then(Commands.argument("player", PlayerArgument.player())
+                                .then(Commands.argument("player", ArgumentTypes.player())
                                         .then(Commands.argument("rank", new RankArgument())
                                                 .executes(ctx -> {
-                                                    Player player = PlayerArgument.getPlayer(ctx, "player");
+                                                    Player player = ctx.getArgument("player", PlayerSelectorArgumentResolver.class).resolve(ctx.getSource()).getFirst();
                                                     Rank rank = ctx.getArgument("rank", Rank.class);
 
-                                                    Starport.rankManager.setRank(player.getUniqueId(), rank);
+                                                    plugin.getRankManager()
+                                                                    .setRank(player.getUniqueId(), rank);
 
                                                     ctx.getSource().getSender().sendMessage(MiniMessage.miniMessage().deserialize(
                                                             "<green>Set " + player.getName() + "'s rank to " + rank.name() + "</green>"));

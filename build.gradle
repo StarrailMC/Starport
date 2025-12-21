@@ -3,7 +3,7 @@ plugins {
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
-group = 'com.moovintwo'
+group = 'com.starrail'
 version = '0.2-Alpha'
 
 repositories {
