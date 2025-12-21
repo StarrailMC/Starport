@@ -29,6 +29,23 @@ public class JoinListener implements Listener {
         Component playerHead = MiniMessage.miniMessage().deserialize("<head:" + event.getPlayer().getName() + "> ");
         Component playerName = Component.text(player.getName());
 
+        Component header = MiniMessage.miniMessage().deserialize(
+                "<blue><bold>Starrail <bold>SMP</blue>" +
+                        "<newline> <gray>Version</gray> <red>0.3 Alpha</red>" +
+                        "<newline><gray>----------------------------------</gray>");
+
+        Component footer = MiniMessage.miniMessage().deserialize(
+                "<gray>----------------------------------</gray><newline>" +
+                        "| <blue>mc.starrail.play</blue>" +
+                        "  | We Don't Own the Domain Yet :( |");
+
+        player.sendPlayerListHeaderAndFooter(header, footer);
+        player.playerListName(Component.textOfChildren(rank, playerName));
+
+
+
+
+
         Random random = new Random();
         Component joinMessage;
         int randomInt = random.nextInt(1,3);

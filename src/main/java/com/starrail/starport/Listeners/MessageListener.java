@@ -5,6 +5,7 @@ import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -31,7 +32,11 @@ public class MessageListener implements Listener {
             Component nameComp = Component.text(player.getName());
             Component separator = Component.text(" | ", NamedTextColor.GRAY);
 
-            return Component.textOfChildren(rank, playerHead, nameComp, separator, message);
+            String rawMessage = PlainTextComponentSerializer.plainText().serialize(message);
+            Component msgFormatted = MiniMessage.miniMessage().deserialize(rawMessage).asComponent();
+
+
+            return Component.textOfChildren(rank, playerHead, nameComp, separator, msgFormatted);
         });
 
     }
