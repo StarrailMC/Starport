@@ -6,11 +6,22 @@ import net.kyori.adventure.text.format.TextDecoration;
 
 public record RanksComponents() {
 
+    // Staff Roles
     public static final Component Owner = Component.text("[ Owner ] ", NamedTextColor.DARK_PURPLE, TextDecoration.BOLD);
     public static final Component CoOwner = Component.text("[ Co-Owner ] ", NamedTextColor.DARK_RED, TextDecoration.BOLD);
     public static final Component Developer = Component.text("[ Developer ] ", NamedTextColor.LIGHT_PURPLE, TextDecoration.BOLD);
     public static final Component Admin = Component.text("[ Admin ] ", NamedTextColor.GREEN, TextDecoration.BOLD);
     public static final Component Moderator = Component.text("[ Moderator ] ", NamedTextColor.AQUA, TextDecoration.BOLD);
+
+
+    public static final Component Union = Component.text("[ The SSR ] ", NamedTextColor.RED, TextDecoration.BOLD);
+
+    // Member Roles
+    public static final Component Creator = Component.text("[ Content Creator ] ", NamedTextColor.RED, TextDecoration.BOLD);
+
+    public static final Component OG = Component.text("[ Original Supporter ] ", NamedTextColor.GOLD, TextDecoration.BOLD);
+    public static final Component Supporter = Component.text("[ Supporter ] ", NamedTextColor.DARK_AQUA, TextDecoration.BOLD);
+    public static final Component VIP = Component.text("[ VIP ] ", NamedTextColor.YELLOW, TextDecoration.BOLD);
     public static final Component Member = Component.text("[ Member ] ", NamedTextColor.BLUE, TextDecoration.BOLD);
 
 }

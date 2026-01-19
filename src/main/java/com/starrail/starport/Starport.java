@@ -5,7 +5,6 @@ import com.starrail.starport.Listeners.JoinListener;
 import com.starrail.starport.Listeners.LeaveListener;
 import com.starrail.starport.Listeners.MessageListener;
 import com.starrail.starport.Teams.Menus.HomeMenu.HomeMenuListener;
-import com.starrail.starport.Teams.TeamsCMD;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.event.Listener;
@@ -33,10 +32,8 @@ public final class Starport extends JavaPlugin {
             Commands commands = event.registrar();
 
             CoreCMD coreCMD = new CoreCMD(this);
-            TeamsCMD teamsCMD = new TeamsCMD(this);
 
             commands.register(coreCMD.starport(),"The Core Starport Command for the Server");
-            commands.register(teamsCMD.guild(), "Base Guild Command");
         });
     }
 
