@@ -95,6 +95,7 @@ public class CoreCMD {
                                                                 ctx.getSource().getSender().sendMessage(MiniMessage.miniMessage().deserialize(
                                                                         "<green>Cleared " + player.getName() + "'s nickname" + "</green>"));
 
+
                                                             } else {
                                                                 player.playerListName(Component.textOfChildren(rank.component(), Component.text(nickname)));
 

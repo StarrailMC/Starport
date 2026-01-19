@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.starrail'
-version = '0.2-Alpha'
+version = '0.4-Alpha'
 
 repositories {
     mavenCentral()
@@ -12,10 +12,14 @@ repositories {
         name = "papermc-repo"
         url = "https://repo.papermc.io/repository/maven-public/"
     }
+    maven {
+        url = 'https://repo.extendedclip.com/releases/'
+    }
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
+    compileOnly 'me.clip:placeholderapi:2.11.7'
     implementation("net.kyori:adventure-api:4.25.0")
     implementation("net.kyori:adventure-text-minimessage:4.25.0")
 }

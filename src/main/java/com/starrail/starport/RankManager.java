@@ -37,11 +37,11 @@ public class RankManager {
 
         if (!file.exists()) {
             try {
-                ranks.put(UUID.fromString(UUIDs.Moovintwo_UUID), Rank.OWNER);
-                ranks.put(UUID.fromString(UUIDs.Alex_UUID), Rank.CO_OWNER);
-                ranks.put(UUID.fromString(UUIDs.ThreadedFlowey_UUID), Rank.DEVELOPER);
-                ranks.put(UUID.fromString(UUIDs.Deplo_UUID), Rank.ADMIN);
-                ranks.put(UUID.fromString(UUIDs.Karma_UUID), Rank.MODERATOR);
+                ranks.put(UUID.fromString(UUIDs.Moovintwo_UUID), Rank.Owner);
+                ranks.put(UUID.fromString(UUIDs.Alex_UUID), Rank.Co_Owner);
+                ranks.put(UUID.fromString(UUIDs.ThreadedFlowey_UUID), Rank.Developer);
+                ranks.put(UUID.fromString(UUIDs.Deplo_UUID), Rank.Admin);
+                ranks.put(UUID.fromString(UUIDs.Karma_UUID), Rank.Moderator);
                 save();
                 return;
             } catch (Exception e) {
@@ -76,11 +76,11 @@ public class RankManager {
     }
 
     public Rank getRank(UUID uuid) {
-        return ranks.getOrDefault(uuid, Rank.MEMBER);
+        return ranks.getOrDefault(uuid, Rank.Member);
     }
 
     public void setRank(UUID uuid, Rank rank) {
-        ranks.put(uuid, rank == null ? Rank.MEMBER : rank);
+        ranks.put(uuid, rank == null ? Rank.Member : rank);
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, this::save);
     }
 

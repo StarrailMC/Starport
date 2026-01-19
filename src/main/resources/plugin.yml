@@ -3,6 +3,7 @@ version: '0.3-Alpha'
 main: com.starrail.starport.Starport
 api-version: '1.21'
 prefix: Starport
+softdepend: [PlaceholderAPI]
 load: STARTUP
 authors: [Moovintwo, Deplo902]
 description: The Core Plugin for the Starrail Server
