@@ -1,4 +1,4 @@
-package com.starrail.starport.Data;
+package net.starrailsmp.starport.Data;
 
 public record UUIDs() {
 

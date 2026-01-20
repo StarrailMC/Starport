@@ -1,10 +1,10 @@
 name: Starport
-version: '0.3-Alpha'
-main: com.starrail.starport.Starport
+version: '0.5-Alpha'
+main: net.starrailsmp.starport.Starport
 api-version: '1.21'
 prefix: Starport
 softdepend: [PlaceholderAPI]
 load: STARTUP
 authors: [Moovintwo, Deplo902]
 description: The Core Plugin for the Starrail Server
-website: none
+website: starrailsmp.net

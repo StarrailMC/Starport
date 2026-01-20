@@ -1,8 +1,11 @@
-package com.starrail.starport.Listeners;
+package net.starrailsmp.starport.Listeners;
 
-import com.starrail.starport.Starport;
+import net.starrailsmp.starport.Integrations.UltimateTeams;
+import net.starrailsmp.starport.Starport;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -31,16 +34,15 @@ public class JoinListener implements Listener {
 
         Component header = MiniMessage.miniMessage().deserialize(
                 "<blue><bold>Starrail <bold>SMP</blue>" +
-                        "<newline> <gray>Version</gray> <red>0.3 Alpha</red>" +
+                        "<newline> <gray>Version</gray> <red>0.5 Alpha</red>" +
                         "<newline><gray>----------------------------------</gray>");
 
         Component footer = MiniMessage.miniMessage().deserialize(
                 "<gray>----------------------------------</gray><newline>" +
-                        "| <blue>mc.starrail.play</blue>" +
+                        "| <blue>starrailsmp.net</blue>" +
                         "  | We Don't Own the Domain Yet :( |");
 
         player.sendPlayerListHeaderAndFooter(header, footer);
-        player.playerListName(Component.textOfChildren(rank, playerName));
 
 
 
@@ -57,7 +59,17 @@ public class JoinListener implements Listener {
             joinMessage = Component.text(" is in the server now");
         }
 
-        event.joinMessage(Component.textOfChildren(rank, playerHead, playerName, joinMessage));
+        if (UltimateTeams.getPrefix(player) != "") {
+
+            Component deserializedPrefix = LegacyComponentSerializer.legacySection().deserialize(UltimateTeams.getPrefix(player));
+            Component teamPrefix = Component.textOfChildren(Component.text("[", NamedTextColor.GRAY), Component.space(), deserializedPrefix, Component.space(), Component.text("]", NamedTextColor.GRAY), Component.space());
+
+            event.joinMessage(Component.textOfChildren(teamPrefix, rank, playerHead, playerName, joinMessage));
+            player.playerListName(Component.textOfChildren(teamPrefix, rank, playerHead, playerName));
+        } else {
+            event.joinMessage(Component.textOfChildren(rank, playerHead, playerName, joinMessage));
+            player.playerListName(Component.textOfChildren(rank, playerHead, playerName));
+        }
     }
 }
 

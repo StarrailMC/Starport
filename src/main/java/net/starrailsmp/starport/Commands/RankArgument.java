@@ -1,4 +1,4 @@
-package com.starrail.starport.Commands;
+package net.starrailsmp.starport.Commands;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.ArgumentType;
@@ -8,11 +8,10 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
-import com.starrail.starport.Data.Rank;
+import net.starrailsmp.starport.Data.Rank;
 import io.papermc.paper.command.brigadier.MessageComponentSerializer;
 import io.papermc.paper.command.brigadier.argument.CustomArgumentType;
 import net.kyori.adventure.text.Component;
-import io.papermc.paper.command.brigadier.*;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.Locale;
@@ -28,7 +27,7 @@ public class RankArgument implements CustomArgumentType<Rank, String> {
         try {
             return Rank.valueOf(input.toUpperCase(Locale.ROOT));
         } catch (IllegalArgumentException e) {
-            throw new com.mojang.brigadier.exceptions.SimpleCommandExceptionType(() -> "Invalid Rank" + input).create();
+            throw new com.mojang.brigadier.exceptions.SimpleCommandExceptionType(() -> "Invalid Rank " + input).create();
         }
     }
 

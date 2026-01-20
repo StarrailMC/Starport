@@ -1,10 +1,10 @@
-package com.starrail.starport;
+package net.starrailsmp.starport;
 
-import com.starrail.starport.Commands.CoreCMD;
-import com.starrail.starport.Listeners.JoinListener;
-import com.starrail.starport.Listeners.LeaveListener;
-import com.starrail.starport.Listeners.MessageListener;
-import com.starrail.starport.Teams.Menus.HomeMenu.HomeMenuListener;
+import net.starrailsmp.starport.Commands.CoreCMD;
+import net.starrailsmp.starport.Listeners.JoinListener;
+import net.starrailsmp.starport.Listeners.LeaveListener;
+import net.starrailsmp.starport.Listeners.MessageListener;
+import net.starrailsmp.starport.Teams.Menus.HomeMenu.HomeMenuListener;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.event.Listener;

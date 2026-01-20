@@ -1,9 +1,9 @@
-package com.starrail.starport;
+package net.starrailsmp.starport;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.starrail.starport.Data.Rank;
-import com.starrail.starport.Data.UUIDs;
+import net.starrailsmp.starport.Data.Rank;
+import net.starrailsmp.starport.Data.UUIDs;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -23,7 +23,7 @@ public class RankManager {
     private final JavaPlugin plugin;
     private final File file;
     private final Gson gson = new Gson();
-    private final Map<UUID, com.starrail.starport.Data.Rank> ranks = new ConcurrentHashMap<>();
+    private final Map<UUID, Rank> ranks = new ConcurrentHashMap<>();
 
     public RankManager(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -37,11 +37,11 @@ public class RankManager {
 
         if (!file.exists()) {
             try {
-                ranks.put(UUID.fromString(UUIDs.Moovintwo_UUID), Rank.Owner);
-                ranks.put(UUID.fromString(UUIDs.Alex_UUID), Rank.Co_Owner);
-                ranks.put(UUID.fromString(UUIDs.ThreadedFlowey_UUID), Rank.Developer);
-                ranks.put(UUID.fromString(UUIDs.Deplo_UUID), Rank.Admin);
-                ranks.put(UUID.fromString(UUIDs.Karma_UUID), Rank.Moderator);
+                ranks.put(UUID.fromString(UUIDs.Moovintwo_UUID), Rank.OWNER);
+                ranks.put(UUID.fromString(UUIDs.Alex_UUID), Rank.CO_OWNER);
+                ranks.put(UUID.fromString(UUIDs.ThreadedFlowey_UUID), Rank.DEVELOPER);
+                ranks.put(UUID.fromString(UUIDs.Deplo_UUID), Rank.ADMIN);
+                ranks.put(UUID.fromString(UUIDs.Karma_UUID), Rank.MODERATOR);
                 save();
                 return;
             } catch (Exception e) {
@@ -76,11 +76,11 @@ public class RankManager {
     }
 
     public Rank getRank(UUID uuid) {
-        return ranks.getOrDefault(uuid, Rank.Member);
+        return ranks.getOrDefault(uuid, Rank.MEMBER);
     }
 
     public void setRank(UUID uuid, Rank rank) {
-        ranks.put(uuid, rank == null ? Rank.Member : rank);
+        ranks.put(uuid, rank == null ? Rank.MEMBER : rank);
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, this::save);
     }
 

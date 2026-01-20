@@ -1,8 +1,11 @@
-package com.starrail.starport.Listeners;
+package net.starrailsmp.starport.Listeners;
 
-import com.starrail.starport.Starport;
+import net.starrailsmp.starport.Integrations.UltimateTeams;
+import net.starrailsmp.starport.Starport;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -44,6 +47,13 @@ public class LeaveListener implements Listener {
             quitMessage = Component.text(" fell asleep");
         }
 
+        if (UltimateTeams.getPrefix(player) != "") {
+
+            Component deserializedPrefix = LegacyComponentSerializer.legacySection().deserialize(UltimateTeams.getPrefix(player));
+            Component teamPrefix = Component.textOfChildren(Component.text("[", NamedTextColor.GRAY), Component.space(), deserializedPrefix, Component.space(), Component.text("]", NamedTextColor.GRAY), Component.space());
+
+            event.quitMessage(Component.textOfChildren(teamPrefix, rank, playerHead, playerName, quitMessage));
+        }
         event.quitMessage(Component.textOfChildren(rank, playerHead, playerName, quitMessage));
     }
 

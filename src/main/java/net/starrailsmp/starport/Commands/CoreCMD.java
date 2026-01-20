@@ -1,9 +1,9 @@
-package com.starrail.starport.Commands;
+package net.starrailsmp.starport.Commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import com.starrail.starport.Data.Rank;
+import net.starrailsmp.starport.Data.Rank;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.command.brigadier.argument.ArgumentTypes;
@@ -12,7 +12,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 
-import com.starrail.starport.Starport;
+import net.starrailsmp.starport.Starport;
 
 import java.util.Objects;
 

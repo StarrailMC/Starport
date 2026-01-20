@@ -1,6 +1,6 @@
-package com.starrail.starport.Teams.Menus.HomeMenu;
+package net.starrailsmp.starport.Teams.Menus.HomeMenu;
 
-import com.starrail.starport.Starport;
+import net.starrailsmp.starport.Starport;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.NamespacedKey;

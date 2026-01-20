@@ -3,8 +3,8 @@ plugins {
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
-group = 'com.starrail'
-version = '0.4-Alpha'
+group = 'net.starrailsmp'
+version = '0.5-Alpha'
 
 repositories {
     mavenCentral()

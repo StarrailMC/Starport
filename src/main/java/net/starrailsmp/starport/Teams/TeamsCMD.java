@@ -1,9 +1,9 @@
-package com.starrail.starport.Teams;
+package net.starrailsmp.starport.Teams;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import com.starrail.starport.Starport;
-import com.starrail.starport.Teams.Menus.HomeMenu.HomeMenu;
+import net.starrailsmp.starport.Starport;
+import net.starrailsmp.starport.Teams.Menus.HomeMenu.HomeMenu;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import org.bukkit.entity.Player;
