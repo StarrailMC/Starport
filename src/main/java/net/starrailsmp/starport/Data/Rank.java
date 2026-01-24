@@ -3,15 +3,17 @@ package net.starrailsmp.starport.Data;
 import net.kyori.adventure.text.Component;
 
 public enum Rank {
-    OWNER, CO_OWNER, DEVELOPER, ADMIN, MODERATOR, UNION, CREATOR, OG, SUPPORTER, VIP, MEMBER;
+    OWNER, CO_OWNER, DEVELOPER, BUILDER, ADMIN, MODERATOR, UNION, CREATOR, OG, SUPPORTER, VIP, MEMBER;
 
     public Component component() {
         return switch (this) {
             case OWNER -> RanksComponents.OWNER;
             case CO_OWNER -> RanksComponents.CO_OWNER;
-            case DEVELOPER -> RanksComponents.DEVELOPER;
             case ADMIN -> RanksComponents.ADMIN;
             case MODERATOR -> RanksComponents.MODERATOR;
+
+            case BUILDER -> RanksComponents.BUILDER;
+            case DEVELOPER -> RanksComponents.DEVELOPER;
 
             case UNION -> RanksComponents.UNION;
             case CREATOR -> RanksComponents.CREATOR;

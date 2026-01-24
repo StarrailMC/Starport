@@ -78,7 +78,7 @@ public class CoreCMD {
                                                     return Command.SINGLE_SUCCESS;
                                                 })))))
 
-                        .then(Commands.literal("nick")
+                        /*.then(Commands.literal("nick")
                                 .then(Commands.argument("player", ArgumentTypes.player())
                                         .then(Commands.argument("rank", new RankArgument())
                                                 .then(Commands.argument("nickname", StringArgumentType.string())
@@ -103,7 +103,7 @@ public class CoreCMD {
                                                                         "<green>Set " + player.getName() + "'s nickname to " + " [ " + rank.name() + " ] " + nickname + "</green>"));
                                                             }
                                                             return Command.SINGLE_SUCCESS;
-                                                        })))))
+                                                        })))))*/
 
                 .build();
     }

@@ -40,7 +40,7 @@ public class JoinListener implements Listener {
         Component footer = MiniMessage.miniMessage().deserialize(
                 "<gray>----------------------------------</gray><newline>" +
                         "| <blue>starrailsmp.net</blue>" +
-                        "  | We Don't Own the Domain Yet :( |");
+                        "  | We Own the Domain Now! :D |");
 
         player.sendPlayerListHeaderAndFooter(header, footer);
 
